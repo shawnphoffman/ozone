@@ -8,7 +8,7 @@ import { Bars3BottomLeftIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { classNames } from '@/lib/util'
 import { useSession } from '@/lib/useSession'
 import { ICONS, NAV_ITEMS, isCurrent } from './common'
-import Image from 'next/image'
+// import Image from 'next/image'
 import { useKBar } from 'kbar'
 
 interface MobileMenuOpen {
@@ -35,11 +35,11 @@ export function MobileMenuBtn() {
   return (
     <button
       type="button"
-      className="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-rose-500 md:hidden"
+      className="px-4 text-gray-500 border-r border-gray-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-rose-500 md:hidden"
       onClick={() => mobileMenuOpen.set(true)}
     >
       <span className="sr-only">Open sidebar</span>
-      <Bars3BottomLeftIcon className="h-6 w-6" aria-hidden="true" />
+      <Bars3BottomLeftIcon className="w-6 h-6" aria-hidden="true" />
     </button>
   )
 }
@@ -81,7 +81,7 @@ export function MobileMenu({ toggleTheme }: { toggleTheme: () => void }) {
               leaveFrom="translate-x-0"
               leaveTo="-translate-x-full"
             >
-              <Dialog.Panel className="relative flex w-full max-w-xs flex-1 flex-col bg-rose-700 dark:bg-teal-700 pt-5 pb-4">
+              <Dialog.Panel className="relative flex flex-col flex-1 w-full max-w-xs pt-5 pb-4 bg-rose-700 dark:bg-teal-700">
                 <Transition.Child
                   as={Fragment}
                   enter="ease-in-out duration-300"
@@ -91,32 +91,34 @@ export function MobileMenu({ toggleTheme }: { toggleTheme: () => void }) {
                   leaveFrom="opacity-100"
                   leaveTo="opacity-0"
                 >
-                  <div className="absolute top-1 right-0 -mr-14 p-1">
+                  <div className="absolute right-0 p-1 top-1 -mr-14">
                     <button
                       type="button"
-                      className="flex h-12 w-12 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-white"
+                      className="flex items-center justify-center w-12 h-12 rounded-full focus:outline-none focus:ring-2 focus:ring-white"
                       onClick={() => mobileMenuOpen.set(false)}
                     >
                       <XMarkIcon
-                        className="h-6 w-6 text-white"
+                        className="w-6 h-6 text-white"
                         aria-hidden="true"
                       />
                       <span className="sr-only">Close sidebar</span>
                     </button>
                   </div>
                 </Transition.Child>
-                <div className="flex flex-shrink-0 items-center px-4">
-                  <Image
+                <div className="flex items-center flex-shrink-0 px-4">
+                  {/* <Image */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                     width={200}
                     height={200}
                     title="Icon from Flaticon: https://www.flaticon.com/free-icons/lifeguard-tower"
-                    className="h-8 w-auto"
-                    src="/img/logo-white.png"
+                    className="w-auto h-8"
+                    src="https://ozone.shawnhoffman.dev/img/logo-white.png"
                     alt="Ozone - Bluesky Admin"
                   />
                 </div>
-                <div className="mt-5 h-0 flex-1 overflow-y-auto px-2">
-                  <nav className="flex h-full flex-col">
+                <div className="flex-1 h-0 px-2 mt-5 overflow-y-auto">
+                  <nav className="flex flex-col h-full">
                     <div className="space-y-1">
                       {NAV_ITEMS.map((item) => {
                         if (item.serviceAccountOnly && !isServiceAccount) {
@@ -181,7 +183,7 @@ export function MobileMenu({ toggleTheme }: { toggleTheme: () => void }) {
                 </div>
               </Dialog.Panel>
             </Transition.Child>
-            <div className="w-14 flex-shrink-0" aria-hidden="true">
+            <div className="flex-shrink-0 w-14" aria-hidden="true">
               {/* Dummy element to force sidebar to shrink to fit close icon */}
             </div>
           </div>

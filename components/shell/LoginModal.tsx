@@ -1,5 +1,5 @@
 'use client'
-import Image from 'next/image'
+// import Image from 'next/image'
 import { FormEvent, useState, useEffect, useContext } from 'react'
 import { LockClosedIcon, XCircleIcon } from '@heroicons/react/20/solid'
 import { AuthChangeContext, AuthContext } from './AuthContext'
@@ -60,21 +60,23 @@ export function LoginModal() {
   }
   return (
     <div className="fixed inset-0 z-20 overflow-y-auto">
-      <div className="flex min-h-full items-center justify-center bg-gradient-to-b from-rose-600 to-rose-800 dark:from-slate-700 dark:to-slate-900">
-        <div className="relative transform overflow-hidden rounded-lg bg-white dark:bg-slate-700 px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
+      <div className="flex items-center justify-center min-h-full bg-gradient-to-b from-rose-600 to-rose-800 dark:from-slate-700 dark:to-slate-900">
+        <div className="relative px-4 pt-5 pb-4 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl dark:bg-slate-700 sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
           <div>
-            <Image
-              className="mx-auto h-20 w-auto"
+            {/* <Image */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              className="w-auto h-20 mx-auto"
               title="Icon from Flaticon: https://www.flaticon.com/free-icons/lifeguard-tower"
-              src="/img/logo-colorful.png"
+              src="https://ozone.shawnhoffman.dev/img/logo-colorful.png"
               alt="Ozone - Bluesky Admin"
               width={200}
               height={200}
             />
-            <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-200">
+            <h2 className="mt-6 text-3xl font-bold tracking-tight text-center text-gray-900 dark:text-gray-200">
               Bluesky Admin Tools
             </h2>
-            <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-100">
+            <p className="mt-2 text-sm text-center text-gray-600 dark:text-gray-100">
               {authState === AuthState.LoggedInUnconfigured && (
                 <>Configure your Ozone service</>
               )}
@@ -100,7 +102,7 @@ export function LoginModal() {
                     type="text"
                     required
                     disabled={isValidatingAuth}
-                    className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 dark:border-slate-600 px-3 py-2 dark:bg-slate-800 text-gray-900 dark:text-gray-200 placeholder-gray-500 focus:z-10 focus:border-rose-500 focus:outline-none focus:ring-rose-500 dark:focus:ring-slate-500 sm:text-sm"
+                    className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md dark:border-slate-600 dark:bg-slate-800 dark:text-gray-200 focus:z-10 focus:border-rose-500 focus:outline-none focus:ring-rose-500 dark:focus:ring-slate-500 sm:text-sm"
                     placeholder="Service URL"
                     list="service-url-suggestions"
                     value={service}
@@ -121,7 +123,7 @@ export function LoginModal() {
                     type="text"
                     required
                     disabled={isValidatingAuth}
-                    className="relative block w-full appearance-none rounded-none border border-gray-300 dark:border-slate-600 px-3 py-2 dark:bg-slate-800 text-gray-900 dark:text-gray-200 placeholder-gray-500 focus:z-10 focus:border-rose-500 focus:outline-none focus:ring-rose-500 dark:focus:ring-slate-500 sm:text-sm"
+                    className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none dark:border-slate-600 dark:bg-slate-800 dark:text-gray-200 focus:z-10 focus:border-rose-500 focus:outline-none focus:ring-rose-500 dark:focus:ring-slate-500 sm:text-sm"
                     placeholder="Account handle"
                     value={handle}
                     onChange={(e) => setHandle(e.target.value)}
@@ -138,7 +140,7 @@ export function LoginModal() {
                     autoComplete="current-password"
                     required
                     disabled={isValidatingAuth}
-                    className="relative block w-full appearance-none rounded-none border border-gray-300 dark:border-slate-600 px-3 py-2 dark:bg-slate-800 text-gray-900 dark:text-gray-200 placeholder-gray-500 focus:z-10 focus:border-rose-500 focus:outline-none focus:ring-rose-500 dark:focus:ring-slate-500 sm:text-sm"
+                    className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none dark:border-slate-600 dark:bg-slate-800 dark:text-gray-200 focus:z-10 focus:border-rose-500 focus:outline-none focus:ring-rose-500 dark:focus:ring-slate-500 sm:text-sm"
                     placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
