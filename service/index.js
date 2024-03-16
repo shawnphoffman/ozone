@@ -18,6 +18,7 @@ async function main() {
   // backend
   const env = readEnv()
   env.version ??= pkg.version
+  env.port = process.env.PORT || env.port
   const config = envToCfg(env)
   const secrets = envToSecrets(env)
   const migrate = process.env.OZONE_DB_MIGRATE === '1'
