@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@atproto/api@^0.11.1":
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/@atproto/api/-/api-0.11.1.tgz#c9a1153ae99fe4ecb85306f9475edefb175ce97d"
-  integrity sha512-U0kdo73e5xFXD4YGLrpviMHPaB/BT4s/22Z/V/geha5V1zjo6DjSC1LVLV1oYx3r/nVaaspPmumwzM0oorU50w==
+"@atproto/api@^0.11.2":
+  version "0.11.2"
+  resolved "https://registry.yarnpkg.com/@atproto/api/-/api-0.11.2.tgz#33432cdaeff674d8b21a28601542884bbe1473b2"
+  integrity sha512-VYpavKaEfuXhce9mP/+boZ7BNglnKSReFCRNXhFpa1KnAvWFHGsf+2jP69skEEnZ1XY4/lQhXdDzZdUIqXn2aA==
   dependencies:
     "@atproto/common-web" "^0.2.4"
     "@atproto/lexicon" "^0.3.3"
@@ -89,12 +89,12 @@
     multiformats "^9.9.0"
     zod "^3.21.4"
 
-"@atproto/ozone@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@atproto/ozone/-/ozone-0.1.1.tgz#2770923f5bd701302c571bb92ffff9ee7ef710b1"
-  integrity sha512-jBwRAGoByq8IucR7lFlA4s+01W7OB+Fvv7Z/Yn6VjYkJs2QWC74rFsd+2mbwZbSFsY8gDq/ZVpfguVqOG0f0YA==
+"@atproto/ozone@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@atproto/ozone/-/ozone-0.1.2.tgz#ff706fba5d12ed5b0d252a340c34b6c30b55e69f"
+  integrity sha512-0zYxMh2Hr4yxQuxJ7+dCBNJKpq0QmBRoihS0IWPEzAnLa5xVxQfjHiGyUt7Han/VgA86GyRf+kncO/VMzQENmA==
   dependencies:
-    "@atproto/api" "^0.11.1"
+    "@atproto/api" "^0.11.2"
     "@atproto/common" "^0.3.4"
     "@atproto/crypto" "^0.3.0"
     "@atproto/identity" "^0.3.3"
@@ -1138,9 +1138,9 @@ camelcase-css@^2.0.1:
   integrity sha512-QOSvevhslijgYwRx6Rv7zKdMF8lbRmx+uQGx2+vDc+KI/eBnsy9kit5aj23AgGu3pa4t9AgwbnXWqS+iOY+2aA==
 
 caniuse-lite@^1.0.30001400, caniuse-lite@^1.0.30001406, caniuse-lite@^1.0.30001426:
-  version "1.0.30001439"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001439.tgz"
-  integrity sha512-1MgUzEkoMO6gKfXflStpYgZDlFM7M/ck/bgfVCACO5vnAf0fXoNVHdWtqGU+MYca+4bL9Z5bpOVmR33cWW9G2A==
+  version "1.0.30001599"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001599.tgz"
+  integrity sha512-LRAQHZ4yT1+f9LemSMeqdMpMxZcc4RMWdj4tiFe3G8tNkWK+E58g+/tzotb5cU6TbcVJLr4fySiAW7XmxQvZQA==
 
 caseless@~0.12.0:
   version "0.12.0"
