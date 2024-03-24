@@ -11,7 +11,7 @@ import {
   AtUri,
   ToolsOzoneModerationDefs,
   ToolsOzoneModerationEmitEvent,
-  ToolsOzoneModerationQueryStatuses
+  ToolsOzoneModerationQueryStatuses,
 } from '@atproto/api'
 import { SectionHeader } from '../../components/SectionHeader'
 import { ModActionIcon } from '@/common/ModActionIcon'
@@ -145,7 +145,9 @@ const getSortParams = (params: ReadonlyURLSearchParams) => {
     sortDirection = 'desc'
   }
 
-  if (!['lastReportedAt', 'lastReviewedAt'].includes(sortField ?? '')) {
+  if (
+    !['lastReportedAt', 'lastReviewedAt', 'createdAt'].includes(sortField ?? '')
+  ) {
     sortField = 'lastReportedAt'
   }
 
@@ -262,17 +264,17 @@ export const ReportsPageContent = () => {
   return (
     <>
       <SectionHeader title={<QueueSelector />} tabs={TABS} current={currentTab}>
-        <div className="flex-1 lg:text-right lg:pr-2 pb-4 px-1 pt-5 lg:pt-0">
+        <div className="flex-1 px-1 pt-5 pb-4 lg:text-right lg:pr-2 lg:pt-0">
           <button
             role="button"
-            className="flex-1 text-gray-500 dark:text-gray-50 hover:text-amber-600 dark:hover:text-amber-100 whitespace-nowrap font-medium text-sm align-text-bottom"
+            className="flex-1 text-sm font-medium text-gray-500 align-text-bottom dark:text-gray-50 hover:text-amber-600 dark:hover:text-amber-100 whitespace-nowrap"
             onClick={() => setQuickActionPanelSubject(subjectOptions[0] ?? '')}
           >
-            Take Action <ModActionIcon className="h-4 w-4 align-text-bottom" />
+            Take Action <ModActionIcon className="w-4 h-4 align-text-bottom" />
           </button>
         </div>
       </SectionHeader>
-      <div className="md:flex mt-2 mb-2 flex-row justify-between px-4 sm:px-6 lg:px-8">
+      <div className="flex-row justify-between px-4 mt-2 mb-2 md:flex sm:px-6 lg:px-8">
         <LanguagePicker />
         <ResolvedFilters />
       </div>
@@ -289,9 +291,7 @@ export const ReportsPageContent = () => {
         subject={quickOpenParam} // select first subject if there are multiple
         subjectOptions={subjectOptions}
         isInitialLoading={isInitialLoading}
-        onSubmit={async (
-          vals: ToolsOzoneModerationEmitEvent.InputSchema,
-        ) => {
+        onSubmit={async (vals: ToolsOzoneModerationEmitEvent.InputSchema) => {
           await emitEvent(vals)
           refetch()
         }}

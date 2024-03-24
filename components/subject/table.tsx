@@ -56,7 +56,7 @@ export function SubjectTable(
           <thead className="bg-white dark:bg-slate-800">
             <SubjectRowHead />
           </thead>
-          <tbody className="divide-y divide-gray-200 bg-white dark:bg-slate-800">
+          <tbody className="bg-white divide-y divide-gray-200 dark:bg-slate-800">
             {!subjectStatuses.length && (
               <EmptyRows isInitialLoading={isInitialLoading} />
             )}
@@ -82,6 +82,9 @@ function SubjectRow({
   subjectStatus,
   ...others
 }: { subjectStatus: SubjectStatus } & HTMLAttributes<HTMLTableRowElement>) {
+  const createdAt = subjectStatus.createdAt
+    ? new Date(subjectStatus.createdAt)
+    : null
   const lastReviewedAt = subjectStatus.lastReviewedAt
     ? new Date(subjectStatus.lastReviewedAt)
     : null
@@ -91,11 +94,11 @@ function SubjectRow({
 
   return (
     <tr {...others}>
-      <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 dark:text-gray-200 sm:w-auto sm:max-w-none sm:pl-6 sm:hidden">
+      <td className="w-full py-4 pl-4 pr-3 text-sm font-medium text-gray-900 max-w-0 dark:text-gray-200 sm:w-auto sm:max-w-none sm:pl-6 sm:hidden">
         <div className="flex flex-row items-center pb-1">
           <ReviewStateIcon
             subjectStatus={subjectStatus}
-            className="h-4 w-4 mr-1"
+            className="w-4 h-4 mr-1"
           />{' '}
           <SubjectOverview
             subject={subjectStatus.subject}
@@ -104,40 +107,55 @@ function SubjectRow({
           />
         </div>
         <dl className="font-normal">
+          {createdAt && (
+            <div className="flex flex-row items-center">
+              <dt>Created</dt>
+              <dd className="ml-1 text-gray-700 truncate dark:text-gray-100">
+                {formatDistanceToNow(createdAt, { addSuffix: true })}
+              </dd>
+            </div>
+          )}
           {lastReviewedAt && (
-            <div className="flex items-center flex-row">
+            <div className="flex flex-row items-center">
               <dt>Last Reviewed</dt>
-              <dd className="ml-1 truncate text-gray-700 dark:text-gray-100">
+              <dd className="ml-1 text-gray-700 truncate dark:text-gray-100">
                 {formatDistanceToNow(lastReviewedAt, { addSuffix: true })}
               </dd>
             </div>
           )}
           {lastReportedAt && (
-            <div className="flex items-center flex-row">
+            <div className="flex flex-row items-center">
               <dt>Last Reported</dt>
-              <dd className="ml-1 truncate text-gray-700 dark:text-gray-100">
+              <dd className="ml-1 text-gray-700 truncate dark:text-gray-100">
                 {formatDistanceToNow(lastReportedAt, { addSuffix: true })}
               </dd>
             </div>
           )}
           {!!subjectStatus?.comment && (
-            <div className="flex items-center flex-row">
+            <div className="flex flex-row items-center">
               <dt>Comment</dt>
-              <dd className="ml-1 truncate text-gray-700 dark:text-gray-100">
+              <dd className="ml-1 text-gray-700 truncate dark:text-gray-100">
                 {subjectStatus.comment}
               </dd>
             </div>
           )}
         </dl>
       </td>
-      <td className="hidden text-center px-3 py-4 text-sm text-gray-500 dark:text-gray-100 sm:table-cell">
-        <ReviewStateIcon subjectStatus={subjectStatus} className="h-5 w-5" />
+      <td className="hidden px-3 py-4 text-sm text-center text-gray-500 dark:text-gray-100 sm:table-cell">
+        <ReviewStateIcon subjectStatus={subjectStatus} className="w-5 h-5" />
       </td>
       <td className="hidden px-3 py-4 text-sm text-gray-500 dark:text-gray-100 sm:table-cell">
         <SubjectOverview
           subject={subjectStatus.subject}
           subjectRepoHandle={subjectStatus.subjectRepoHandle}
         />
+      </td>
+      <td className="hidden px-3 py-4 text-sm text-gray-500 dark:text-gray-100 sm:table-cell">
+        {createdAt && (
+          <span title={createdAt.toLocaleString()}>
+            {formatDistanceToNow(createdAt, { addSuffix: true })}
+          </span>
+        )}
       </td>
       <td className="hidden px-3 py-4 text-sm text-gray-500 dark:text-gray-100 sm:table-cell max-w-sm">
         {lastReviewedAt && (
@@ -190,6 +208,20 @@ function SubjectRowHead() {
         scope="col"
         className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-200 sm:table-cell"
       >
+        {/* <Link prefetch={false} href={getToggleReverseOrderLink('createdAt')}> */}
+        Created
+        {sortField === 'createdAt' &&
+          (sortDirection === 'asc' ? (
+            <ChevronUpIcon className="inline-block w-4 h-4 align-text-bottom" />
+          ) : (
+            <ChevronDownIcon className="inline-block w-4 h-4 align-text-bottom" />
+          ))}
+        {/* </Link> */}
+      </th>
+      <th
+        scope="col"
+        className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-gray-200 sm:table-cell"
+      >
         <Link
           prefetch={false}
           href={getToggleReverseOrderLink('lastReviewedAt')}
@@ -197,9 +229,9 @@ function SubjectRowHead() {
           Last Reviewed/Note
           {sortField === 'lastReviewedAt' &&
             (sortDirection === 'asc' ? (
-              <ChevronUpIcon className="h-4 w-4 inline-block align-text-bottom" />
+              <ChevronUpIcon className="inline-block w-4 h-4 align-text-bottom" />
             ) : (
-              <ChevronDownIcon className="h-4 w-4 inline-block align-text-bottom" />
+              <ChevronDownIcon className="inline-block w-4 h-4 align-text-bottom" />
             ))}
         </Link>
       </th>
@@ -214,9 +246,9 @@ function SubjectRowHead() {
           Last Reported
           {sortField === 'lastReportedAt' &&
             (sortDirection === 'asc' ? (
-              <ChevronUpIcon className="h-4 w-4 inline-block align-text-bottom" />
+              <ChevronUpIcon className="inline-block w-4 h-4 align-text-bottom" />
             ) : (
-              <ChevronDownIcon className="h-4 w-4 inline-block align-text-bottom" />
+              <ChevronDownIcon className="inline-block w-4 h-4 align-text-bottom" />
             ))}
         </Link>
       </th>
@@ -236,10 +268,10 @@ function EmptyRows({ isInitialLoading }: { isInitialLoading: boolean }) {
             </p>
           </>
         ) : (
-          <p className="py-4 text-gray-400 dark:text-gray-100 text-center">
+          <p className="py-4 text-center text-gray-400 dark:text-gray-100">
             <CheckCircleIcon
               title="No reports"
-              className="h-10 w-10 text-green-300 align-text-bottom mx-auto mb-4"
+              className="w-10 h-10 mx-auto mb-4 text-green-300 align-text-bottom"
             />
             Moderation queue is empty
           </p>

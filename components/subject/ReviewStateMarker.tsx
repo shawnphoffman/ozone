@@ -64,7 +64,7 @@ export const SubjectReviewStateBadge = ({
     ? `${reviewStateToColor[subjectStatus.reviewState].bg} ${
         reviewStateToColor[subjectStatus.reviewState].text
       }`
-    : 'bg-gray-200 text-gray-800'
+    : 'bg-gray-200 text-gray-600'
 
   if (subjectStatus.takendown) {
     text += '(Taken Down)'
